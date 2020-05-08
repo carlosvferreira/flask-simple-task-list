@@ -9,11 +9,6 @@ Simple task list created using Flask and Flask-SQLAlchemy with the objective of 
 4. python3 app.py
 5. Navigate to http://localhost:5000/ on your browser
 
-### Heroku
-
-Test it live at: 
-coming soon
-
 ### Author
 Carlos Eduardo da Veiga Ferreira
 
