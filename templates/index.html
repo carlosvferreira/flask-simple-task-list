@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+
+{% block head %}
+<title>Daily Tasks</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="content">
+  <h1>Daily Tasks</h1>
+
+  {% if tasks|length < 1 %}
+  <h4>There are no tasks. Create your first task below!</h4>
+
+  {% else %}
+    <table>
+      <tr>
+        <th width="60%">Task</th>
+        <th>Added</th>
+        <th>Actions</th>
+      </tr>
+      {% for task in tasks %}  
+        <tr>
+          <td>{{ task.content }}</td>
+          <td>{{ task.date_created.strftime('%d-%m-%Y') }}</td>
+          <td>
+            <a href="/complete/{{task.id}}">Complete</a>
+            <br>
+            <a href="/delete/{{task.id}}">Delete</a>
+            <br>
+            <a href="/edit/{{task.id}}">Edit</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+
+  <form action="/" method="POST">
+    <input type="text" name="content" id="taskcontent">
+    <input type="submit" id="tasksubmit" value="Add Task">
+  </form>
+
+   {% if tasks_done|length < 1 %}
+  <h4>Complete your first task above!</h4>
+
+  {% else %}
+    <table class="completedTasksTable">
+      <tr>
+        <th width="60%">Task</th>
+        <th>Completed</th>
+      </tr>
+      {% for task_done in tasks_done %}
+        <tr class="completedTasks">
+          <td>{{ task_done.content }}</td>
+          <td>{{ task_done.date_finished.strftime('%d-%m-%Y') }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+    <a href="/clear" class="button" id="clearlistbutton">Clear the list of completed tasks</a>
+  {% endif %}
+</div>
+
+{% endblock %}
