@@ -26,6 +26,7 @@ class Done(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+
   if request.method == 'POST' and request.form['content']!= "":
     task_content = request.form['content']
     new_task = Todo(content=task_content)
@@ -38,7 +39,7 @@ def index():
       return 'Tere was an error while adding the task'
 
   elif request.method == 'POST' and request.form['content']== "":
-    return print("erro")
+    return redirect('/')
 
   else:
       tasks = Todo.query.order_by(Todo.date_created).all()
